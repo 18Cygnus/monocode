@@ -1918,6 +1918,18 @@ html:not(.is-mac) [data-composer-box]::before {
   border-radius: inherit;
 }
 
+/* WebKitGTK draws the composer's text soft over a backdrop-filter layer.
+   Paint a solid surface on Linux instead of frosting the background. */
+html.is-linux [data-composer-box]::before {
+  background: color-mix(
+    in srgb,
+    var(--color-content) 4%,
+    var(--color-background-base)
+  );
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
 /* The queue ledge tucks behind the inset composer: inset by its corner
    radius, a quieter edge than the box itself, and the same frost. */
 html.layout-inset [data-message-queue] {
@@ -1942,6 +1954,12 @@ html.layout-inset.theme-light [data-message-queue-card] {
 html.layout-inset:not(.theme-light) .agent-chat-composer {
   -webkit-backdrop-filter: blur(24px);
   backdrop-filter: blur(24px);
+}
+
+html.is-linux.layout-inset [data-message-queue-card],
+html.is-linux.layout-inset .agent-chat-composer {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 /* The light box is already solid, so a blur behind it has nothing to frost

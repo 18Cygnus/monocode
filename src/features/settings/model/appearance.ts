@@ -421,6 +421,7 @@ function applyStoredTheme() {
 
 export function initAppearance() {
   document.documentElement.classList.toggle("is-mac", IS_MAC);
+  document.documentElement.classList.toggle("is-linux", IS_LINUX);
   applyStoredTheme();
   watchSystemColorScheme();
   // Settings applies a theme change only to its own window. Other windows
